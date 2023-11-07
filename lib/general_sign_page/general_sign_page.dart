@@ -1,0 +1,1 @@
+export 'view/general_sign_page.dart';
