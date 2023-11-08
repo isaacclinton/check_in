@@ -1,3 +1,4 @@
+import 'package:check_in/subscription_page/subscription_page.dart';
 import 'package:check_in/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_verification_code_field/flutter_verification_code_field.dart';
@@ -44,7 +45,13 @@ class VerificationPage extends StatelessWidget {
                   alignment: Alignment.center,
                   child: CustomButton(
                     "VERIFY",
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const SubscriptionPage(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
