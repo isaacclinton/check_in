@@ -1,3 +1,4 @@
+import 'package:check_in/employer_home_page/employer_home_page.dart';
 import 'package:flutter/material.dart';
 
 class Subscription {
@@ -107,7 +108,14 @@ class SubscriptionPage extends StatelessWidget {
                                         vertical: 10, horizontal: 3),
                                     child: SubscriptionCard(
                                       subscription: sub,
-                                      onTap: (){},
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const EmployerHomePage(),
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
@@ -143,10 +151,9 @@ class SubscriptionCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 170,
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
-          vertical: 20,
+          vertical: 30,
         ),
         decoration: const BoxDecoration(
             color: Color(0xFF2F66F3),
@@ -190,7 +197,7 @@ class SubscriptionCard extends StatelessWidget {
                 Text(
                   "Maximum ${subscription.maxEmployees} employees",
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     color: Colors.white,
                   ),
                 ),
@@ -198,7 +205,7 @@ class SubscriptionCard extends StatelessWidget {
                 Text(
                   "Maximum ${subscription.maxBusiness} business",
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     color: Colors.white,
                   ),
                 )
