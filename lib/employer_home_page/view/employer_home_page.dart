@@ -26,7 +26,9 @@ const statuses = <BusinessCheckInStatus>[
 ];
 
 class EmployerHomePage extends StatelessWidget {
-  const EmployerHomePage({super.key});
+  EmployerHomePage({super.key});
+
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,32 @@ class EmployerHomePage extends StatelessWidget {
       height: size.height,
       width: size.width,
       child: Scaffold(
+        key: _key,
+        drawer: Drawer(
+          width: 250,
+          child: SafeArea(
+            child: ListView(
+              children: [
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Placeholder(
+                      fallbackHeight: 100,
+                      fallbackWidth: 100,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                SideMenuItem(
+                  name: "Settings",
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
         backgroundColor: const Color(0xFFD9D9D9),
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -66,7 +94,9 @@ class EmployerHomePage extends StatelessWidget {
               color: Colors.black,
               size: 32,
             ),
-            onPressed: () {},
+            onPressed: () {
+              _key.currentState!.openDrawer();
+            },
           ),
         ),
         body: SafeArea(
@@ -80,6 +110,36 @@ class EmployerHomePage extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class SideMenuItem extends StatelessWidget {
+  const SideMenuItem({
+    super.key,
+    required this.name,
+    this.onTap,
+  });
+
+  final String name;
+  final void Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        decoration: const BoxDecoration(
+          border: Border.symmetric(
+            horizontal: BorderSide(),
+          ),
+        ),
+        child: const Text(
+          "Settings",
+          style: TextStyle(fontSize: 16),
         ),
       ),
     );
