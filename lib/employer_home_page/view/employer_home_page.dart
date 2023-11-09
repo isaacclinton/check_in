@@ -1,3 +1,4 @@
+import 'package:check_in/business_page/business_page.dart';
 import 'package:flutter/material.dart';
 
 class BusinessCheckInStatus {
@@ -105,7 +106,16 @@ class EmployerHomePage extends StatelessWidget {
             child: ListView(
               children: [
                 ...statuses.map(
-                  (status) => BusinessCheckInStatusCard(status: status),
+                  (status) => BusinessCheckInStatusCard(
+                    status: status,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) {
+                          return const BusinessPage();
+                        }),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
@@ -150,41 +160,46 @@ class BusinessCheckInStatusCard extends StatelessWidget {
   const BusinessCheckInStatusCard({
     super.key,
     required this.status,
+    this.onTap,
   });
 
   final BusinessCheckInStatus status;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 25),
-      padding: const EdgeInsets.symmetric(
-        vertical: 30,
-        horizontal: 20,
-      ),
-      decoration: BoxDecoration(
-        color: const Color(0xFF05BFDB),
-        borderRadius: const BorderRadius.all(Radius.circular(5)),
-        border: Border.all(),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            status.name,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(top: 25),
+        padding: const EdgeInsets.symmetric(
+          vertical: 30,
+          horizontal: 20,
+        ),
+        decoration: BoxDecoration(
+          color: const Color(0xFF05BFDB),
+          borderRadius: const BorderRadius.all(Radius.circular(5)),
+          border: Border.all(),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              status.name,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            "${status.checkedIn} out of ${status.totalEmployees} checked in",
-            style: const TextStyle(
-              fontSize: 16,
+            const SizedBox(height: 20),
+            Text(
+              "${status.checkedIn} out of ${status.totalEmployees} checked in",
+              style: const TextStyle(
+                fontSize: 16,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
