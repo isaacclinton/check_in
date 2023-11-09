@@ -1,3 +1,4 @@
+import 'package:check_in/add_organisation_page/view/add_organisation_page.dart';
 import 'package:check_in/business_page/business_page.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +72,13 @@ class EmployerHomePage extends StatelessWidget {
           automaticallyImplyLeading: false,
           actions: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AddOrganisationPage(),
+                  ),
+                );
+              },
               style: TextButton.styleFrom(
                 textStyle: const TextStyle(
                   color: Colors.black,
